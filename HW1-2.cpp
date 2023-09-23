@@ -18,7 +18,7 @@ int main(){
        string input;
        cout<<"Please input how many arrays and how many characters in each array:"<<endl;
        cin>>x>>y;
-       string** arr = new string* [x];
+       string** arr = (string**)malloc(sizeof(string*) * x);
        for(int i=0;i<x;i++){
             arr[i] = new string[y+1];
        }
@@ -40,7 +40,7 @@ int main(){
         cout<<endl;
     }
     for(int i=0;i<x;i++){
-        delete [] arr[i];
+        free(arr[i]);
     }
-    delete [] arr;
+    free(arr);
 }
