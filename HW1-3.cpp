@@ -16,6 +16,7 @@ void namearrangge(int count,string* arr,int x){
         }
     }
 }
+
 int main(){
     int x,maxlen=0,count=0;
     string name;
@@ -30,10 +31,9 @@ int main(){
     for(int i=0;i<x;i++){
         cout << "Please enter the "<<i+1<<" name:"<<endl;
         getline(cin, name);
-        if(name.length()>maxlen){
-            maxlen=name.length();
+        if(name.find(" ")!=string::npos && name.find(" ")>maxlen){
+            maxlen=name.find(" ");
             count=i;
-
         }
         arr[i]=name;
     }
