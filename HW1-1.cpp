@@ -7,9 +7,9 @@ using namespace std;
 void Bubblesort(char** arr,int x){
     for(int i=0;i<x-1;i++){
         if(arr[i][0]<arr[i+1][0]){
-            char temp = arr[i][0];
-            arr[i][0] = arr[i+1][0];
-            arr[i+1][0] = temp;
+            char* temp = arr[i];
+            arr[i] = arr[i+1];
+            arr[i+1] = temp;
         }
     }
 }
@@ -30,18 +30,14 @@ int main(){
             for(int j=0;j<y;j++){
                 arr[i][j] = input[j];
             }
-
+            arr[i][y] = '\0'; 
        }       
     Bubblesort(arr,x);
     cout<<"After sorting:"<<endl<<endl;
-    
+
     for(int i=0;i<x;i++){
-        for(int j=0;j<y;j++){
-            cout<<arr[i][j];
-        }
-        cout<<endl;
+        cout<<arr[i]<<endl;
     }
-    cout<<endl;
     for(int i=0;i<x;i++){
         delete [] arr[i];
     }
