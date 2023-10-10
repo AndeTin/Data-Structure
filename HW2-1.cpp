@@ -22,16 +22,27 @@ int(BinarySearch(int*a, const int x, const int n)){
 }
 
 int main(){
-    int a[100];
-    srand(time(NULL));
-    int t = rand() % 100 + 1;
-    for(int i = 0; i < 100; i++){
-        a[i] = i + 1;
+    for(int n=1; n<=100; n++){
+        int *a = new int[n];
+        for(int i=0; i<n; i++){
+            a[i] = i;
+        }
+        srand(time(NULL));
+        int x = rand() % n;
+        clock_t start, end;
+        start = clock();
+        int index = BinarySearch(a, x, n);
+        end = clock();
+        double t = (double)(end - start) / CLOCKS_PER_SEC;
+        if(index == -1){
+            cout << "NO."<<n<<" Not found" << endl;
+        }
+        else{
+            cout << "NO." << n << " index= "<< index << " time cost: "<< t << endl;
+        }
+        delete []a;
+
+
     }
-    clock_t start = clock();
-    cout << BinarySearch(a, t, 100) << endl;
-    clock_t end = clock();
-    double elapsed_time = double(end - start) / CLOCKS_PER_SEC;
-    cout << "Elapsed time: " << elapsed_time << " seconds" << endl;
     return 0;
 }
