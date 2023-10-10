@@ -3,19 +3,19 @@
 
 using namespace std;
 
-int(BinarySearch(int*a, const int x, const int n)){
+int BinarySearch(int*a, const int x, const int n){
     int left = 0;
     int right = n - 1;
     while(left <= right){
         int middle = (left + right) / 2;
-        if(x == a[middle]){
-            return middle;
+        if(x < a[middle]){
+            right = middle - 1;
         }
-        if(x > a[middle]){
+        else if(x > a[middle]){
             left = middle + 1;
         }
         else{
-            right = middle - 1;
+            return middle;
         }
     }
     return -1;
@@ -27,13 +27,12 @@ int main(){
         for(int i=0; i<n; i++){
             a[i] = i;
         }
-        srand(time(NULL));
+        //srand(time(NULL));
         int x = rand() % n;
-        clock_t start, end;
-        start = clock();
+        auto start = clock();
         int index = BinarySearch(a, x, n);
-        end = clock();
-        double t = (double)(end - start) / CLOCKS_PER_SEC;
+        auto end = clock();
+        double t = static_cast<double>((end - start) /(double)CLOCKS_PER_SEC);
         if(index == -1){
             cout << "NO."<<n<<" Not found" << endl;
         }
