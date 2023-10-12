@@ -34,7 +34,7 @@ int main(){
         BinarySearch(a, x, n);
         auto end = chrono::steady_clock::now();
         auto time = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
-        cout << "NO." << n << '\t' << "Time cost:" << static_cast<double>(time)  << " nanoseconds" << endl;
+        cout << "NO." << n << '\t' << "Time cost:" << (double)(time)  << " nanoseconds" << endl;
     }
     return 0;
 }
