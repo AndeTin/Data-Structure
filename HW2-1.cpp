@@ -1,10 +1,11 @@
 #include<iostream>
 #include<time.h>
 #include<chrono>
+#include<vector>
 
 using namespace std;
 
-int BinarySearch(int*a, const int x, const int n){
+int BinarySearch(vector<int>& a, const int x, const int n){
     int left = 0;
     int right = n - 1;
     while(left <= right){
@@ -23,24 +24,17 @@ int BinarySearch(int*a, const int x, const int n){
 }
 
 int main(){
-    for(int n=1; n<=10; n++){
-        int *a = new int[n];
+    for(int n=1; n<=100; n++){
+        vector<int> a;
         for(int i=0; i<n; i++){
-            a[i] = i;
+            a.push_back(i);
         }
         int x = rand() % n;
-        double start = clock();
-        int index = BinarySearch(a, x, n);
-        double end = clock();
-        if(index == -1){
-            cout << "NO."<<n<<" Not found" << endl;
-        }
-        else{
-            cout << "NO." << n <<'\t'<< "index= "<< index << '\t' << "time cost: "<< (end-start)/CLOCKS_PER_SEC<< endl;
-        }
-        delete []a;
-
-
+        auto start = chrono::steady_clock::now();
+        BinarySearch(a, x, n);
+        auto end = chrono::steady_clock::now();
+        auto time = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
+        cout << "NO." << n << '\t' << "Time cost:" << static_cast<double>(time)  << " nanoseconds" << endl;
     }
     return 0;
 }
