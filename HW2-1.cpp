@@ -30,7 +30,6 @@ int main(){
         }
         int x = rand() % n;
         double start = clock();
-        cout <<start<<endl;
         int index = BinarySearch(a, x, n);
         double end = clock();
         if(index == -1){
