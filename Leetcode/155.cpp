@@ -5,65 +5,34 @@ using namespace std;
 
 class MinStack {
     private:
-        vector<int> stack;
-        vector <int> min;
-        int topn;
-        int minn;
+       int min;
+       int top;
     public:
         MinStack() {
-            topn = -1;
-            minn = -1;
-            vector <int> stack;
-            vector <int> min;
+            vector<int> stack;
+            vector<int> minStack;
+            top = -1;
+            min = -1;
         }
         void push(int x) {
-            if (topn == -1) {
-                topn++;
-                minn++;
-                stack.push_back(x);
-                min.push_back(x);
-                }
-            else if (x < min[topn]) {
-                stack.push_back(x);
-                min.push_back(x);
-                topn++;
-                minn++;
-                }
-            else {
-                stack.push_back(x);
-                topn++;
-                }
+            top++;
+            stack.push_back(x);
+            if(min == -1 || x < min) {
+                min++;
+                minStack.push_back(x);
             }
+        }
         void pop() {
-            if (topn == -1) {
-                return;
+            if(stack.top() == minStack.top()) {
+                minStack.pop_back();
+                min--;
             }
-            else if (min[minn] == stack[topn]) {
-                stack.pop_back();
-                min.pop_back();
-                topn--;
-                minn--;
-            }
-            else {
-                stack.pop_back();
-                topn--;
-            }
+            stack.pop_back();
         }
         int top() {
-            if (topn == -1) {
-                return -1;
-            }
-            else {
-                return stack[topn];
-            }
+            return stack.top();
         }
         int getMin() {
-            if (topn == -1) {
-                return -1;
-            }
-            else {
-                return min[minn];
-            }
+            return minStack.top();
         }
-        
 };
