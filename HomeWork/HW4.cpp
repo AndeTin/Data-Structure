@@ -22,6 +22,7 @@ class linklist{
             size = 0;
             head = 0;
         }
+        //set the polynomial
         void insert(){
             cout << "Please input the size of the polynomial:" << endl;
             cin >> size;
@@ -59,6 +60,7 @@ class linklist{
             }
             head[size-1].next = 0;
         }
+        //multiply the polynomial
         void multiply(linklist &a, linklist &b){
             linklist c ;
             c.size = a.size * b.size;
@@ -69,6 +71,7 @@ class linklist{
                     c.head[i*b.size+j].exp = a.head[i].exp + b.head[j].exp;
                 }
             }
+            //bouble sort the polynomial
             for(int i = 0; i < c.size; i++){
                 for (int j = i+1; j < c.size; j++){
                     if(c.head[i].exp < c.head[j].exp){
@@ -78,40 +81,30 @@ class linklist{
                     }
                 }
             }
+            //set the next pointer
             for(int i = 0; i < c.size; i++){
                 if(i == c.size-1)
                     c.head[i].next = 0;
                 else
                     c.head[i].next = &c.head[i+1];
             }
-
-            cout << "The result of the multiplication without simp is:" << endl;
-            for(int i = 0; i < c.size; i++){
-                cout << c.head[i].coef << "x^" << c.head[i].exp;
-                if(i != c.size-1){
-                    cout << " + ";
-                }
-            }
             cout << endl;
-
+            //simplify the polynomial
             cout << "Begin to simplify the polynomial:" << endl;
             int count = 0;
-            for(int i = 0; i < c.size; i++){
-                if(c.head[i].exp == c.head[i+1].exp){
-                    c.head[i].coef += c.head[i+1].coef;
-                    for(int j = i+1; j < c.size-1; j++){
-                        c.head[j] = c.head[j+1];
-                        c.head[j].next = &c.head[j+1];
-                    }
-                    c.head[c.size-1].next = 0;
-                    c.head[c.size-1].coef = 0;
-                    c.head[c.size-1].exp = 0;
+            node *test = c.head;
+            for(int i = 0 ; i < c.size; i++){
+                if(test->exp == c.head[i+1].exp){
+                    test->coef += c.head[i+1].coef;
+                    c.head[i+1].coef = 0;
                     count++;
-                    cout << count << " times of simplification" << endl;
-                    
                 }
-            }
+                else{
+                    test = test->next;
+                }
 
+            }
+            //print the result
             cout << "The result of the multiplication is:" << endl;
             for(int i = 0; i < c.size; i++){
                 if(c.head[i].coef != 0 && c.head[i].exp != 0){
@@ -122,6 +115,7 @@ class linklist{
                 }
             }
             cout << endl;
+            //free the memory
             free(&c);
         }
 };
