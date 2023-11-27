@@ -31,7 +31,7 @@ class linklist{
                 cin >> head[i].coef ;
                 while(cin.fail()){
                     cin.clear();
-                    cin.ignore(1024, '\n');
+                    cin.ignore(1000, '\n');
                     cout << "Please enter a number for the coefficient of polynomial " << i+1 << ":" << endl;
                     cin >> head[i].coef ;
                 }
