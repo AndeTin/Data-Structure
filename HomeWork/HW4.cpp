@@ -29,8 +29,20 @@ class linklist{
             for(int i = 0; i < size; i++){
                 cout << "Please input the coefficient of the polynomial " << i+1 << ":" << endl;
                 cin >> head[i].coef ;
+                while(cin.fail()){
+                    cin.clear();
+                    cin.ignore(1024, '\n');
+                    cout << "Please enter a number for the coefficient of polynomial " << i+1 << ":" << endl;
+                    cin >> head[i].coef ;
+                }
                 cout << endl << "Please input the exponent of the polynomial " << i+1 << ":" << endl;
                 cin >> head[i].exp;
+                while(cin.fail()){
+                    cin.clear();
+                    cin.ignore(1024, '\n');
+                    cout << "Please enter a number for the exponent of polynomial " << i+1 << ":" << endl;
+                    cin >> head[i].exp;
+                }
                 cout << endl;
             }
             for(int i = 0; i < size; i++){
