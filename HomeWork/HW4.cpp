@@ -7,7 +7,7 @@ class linklist{
         class node{
             private:
                 double exp , coef;
-                node *next;
+                node* next;
                 friend class linklist;
             public:
                 node(){
@@ -29,18 +29,18 @@ class linklist{
             head = new node[size];
             for(int i = 0; i < size; i++){
                 cout << "Please input the coefficient of the polynomial " << i+1 << ":" << endl;
-                cin >> head[i].coef ;
+                cin >> head[i].coef >> head[i].exp;
+                // cin >> head[i].exp;
                 while(cin.fail()){
                     cin.clear();
                     cin.ignore(1000, '\n');
                     cout << "Please enter a number for the coefficient of polynomial " << i+1 << ":" << endl;
                     cin >> head[i].coef ;
                 }
-                cout << endl << "Please input the exponent of the polynomial " << i+1 << ":" << endl;
-                cin >> head[i].exp;
+                // cout << endl << "Please input the exponent of the polynomial " << i+1 << ":" << endl;
                 while(cin.fail()){
                     cin.clear();
-                    cin.ignore(1024, '\n');
+                    cin.ignore(1000, '\n');
                     cout << "Please enter a number for the exponent of polynomial " << i+1 << ":" << endl;
                     cin >> head[i].exp;
                 }
@@ -71,8 +71,9 @@ class linklist{
                     c.head[i*b.size+j].exp = a.head[i].exp + b.head[j].exp;
                 }
             }
-            //bouble sort the polynomial
-            for(int i = 0; i < c.size; i++){
+            cout<< "Calculate finished" << endl;
+            //sort the polynomial
+            for(int i = 0; i<c.size; i++){
                 for (int j = i+1; j < c.size; j++){
                     if(c.head[i].exp < c.head[j].exp){
                         node temp = c.head[i];
@@ -81,6 +82,7 @@ class linklist{
                     }
                 }
             }
+            cout << "Sort finished" << endl;
             //set the next pointer
             for(int i = 0; i < c.size; i++){
                 if(i == c.size-1)
@@ -88,7 +90,7 @@ class linklist{
                 else
                     c.head[i].next = &c.head[i+1];
             }
-            cout << endl;
+            cout << "Set next pointer finished" << endl;
             //simplify the polynomial
             cout << "Begin to simplify the polynomial:" << endl;
             int count = 0;
@@ -96,6 +98,7 @@ class linklist{
             for(int i = 0 ; i < c.size; i++){
                 if(test->exp == c.head[i+1].exp){
                     test->coef += c.head[i+1].coef;
+                    test->next = c.head[i+1].next;
                     c.head[i+1].coef = 0;
                     count++;
                 }
